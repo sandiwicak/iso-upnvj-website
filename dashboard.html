@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - ISO UPNVJ</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      📋 Sistem Input Dokumen ISO
+    </div>
+   <div class="navbar-user">
+     <a href="rekap.html" style="color:white;text-decoration:none;   opacity:0.9;font-size:14px;">Rekap</a>
+       <a href="manage-user.html" id="link-manage-user"     style="color:white;text-decoration:none;opacity:0.9;        font-size:14px;display:none;">Kelola User</a>
+      <span id="user-info">Memuat...</span>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-container">
+
+  <!-- Progress Card -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📊 Progress Kesiapan Dokumen</h2>
+      <span id="year-badge" class="badge badge-info">Tahun -</span>
+    </div>
+    <div class="progress-section">
+      <div class="progress-stats">
+        <div>
+          <strong id="progress-count">0/0</strong> dokumen tersedia
+        </div>
+        <div>
+          <strong id="progress-percent">0%</strong> selesai
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daftar Dokumen -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📁 Daftar Dokumen</h2>
+    </div>
+
+    <!-- Filter -->
+    <div class="filters">
+  <div id="subsatker-filter" style="display:none;">
+    <label>Subsatker:</label>
+    <select id="filter-subsatker" onchange="onSubsatkerChange()">
+      <option value="">-- Pilih Subsatker --</option>
+    </select>
+  </div>
+  <label>Filter:</label>
+  <select id="filter-kategori" onchange="renderDocs()">
+    <option value="">Semua Kategori</option>
+    <option value="A">Kategori A (70%)</option>
+    <option value="B">Kategori B (30%)</option>
+  </select>
+  <select id="filter-status" onchange="renderDocs()">
+    <option value="">Semua Status</option>
+    <option value="tersedia">✅ Tersedia</option>
+    <option value="kosong">❌ Belum Diisi</option>
+  </select>
+  <input type="text" id="filter-search" placeholder="Cari nama dokumen..." oninput="renderDocs()">
+</div>
+
+    <!-- Table -->
+    <div class="table-wrapper" id="table-container">
+      <div class="loading">
+        <span class="spinner"></span> Memuat data...
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/dashboard.js"></script>
+
+</body>
+</html>

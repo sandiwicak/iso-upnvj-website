@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekap - ISO UPNVJ</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      📊 Rekap Kesiapan ISO
+    </div>
+   <div class="navbar-user">
+        <a href="dashboard.html" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;">Dashboard</a>
+        <a href="manage-user.html" id="link-manage-user" style="color:white;text-decoration:none;opacity:0.9;font-size:14px;display:none;">Kelola User</a>
+        <span id="user-info">Memuat...</span>
+        <button onclick="logout()">Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-container">
+
+  <!-- Summary Card -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📈 Ringkasan</h2>
+      <span id="year-badge" class="badge badge-info">Tahun -</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;">
+      <div style="text-align:center;padding:16px;background:#f9fafb;border-radius:8px;">
+        <div style="font-size:28px;font-weight:700;color:#1e40af;" id="stat-total">-</div>
+        <div style="font-size:13px;color:#6b7280;margin-top:4px;">Total Subsatker</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#f9fafb;border-radius:8px;">
+        <div style="font-size:28px;font-weight:700;color:#059669;" id="stat-excellent">-</div>
+        <div style="font-size:13px;color:#6b7280;margin-top:4px;">Skor ≥ 90</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#f9fafb;border-radius:8px;">
+        <div style="font-size:28px;font-weight:700;color:#d97706;" id="stat-good">-</div>
+        <div style="font-size:13px;color:#6b7280;margin-top:4px;">Skor 70-89</div>
+      </div>
+      <div style="text-align:center;padding:16px;background:#f9fafb;border-radius:8px;">
+        <div style="font-size:28px;font-weight:700;color:#dc2626;" id="stat-poor">-</div>
+        <div style="font-size:13px;color:#6b7280;margin-top:4px;">Skor &lt; 70</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabel Rekap -->
+  <div class="card">
+    <div class="card-header">
+      <h2>📋 Rekap per Subsatker</h2>
+      <div>
+        <button class="btn btn-secondary btn-sm" onclick="exportCSV()">📥 Export CSV</button>
+        <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print</button>
+      </div>
+    </div>
+
+    <!-- Filter -->
+    <div class="filters">
+      <label>Cari:</label>
+      <input type="text" id="filter-search" placeholder="Cari subsatker..." oninput="renderRekap()" style="flex:1;min-width:200px;">
+      <label>Skor:</label>
+      <select id="filter-skor" onchange="renderRekap()">
+        <option value="">Semua</option>
+        <option value="excellent">≥ 90 (Excellent)</option>
+        <option value="good">70-89 (Good)</option>
+        <option value="poor">&lt; 70 (Perlu Perbaikan)</option>
+      </select>
+      <label>Sort:</label>
+      <select id="filter-sort" onchange="renderRekap()">
+        <option value="skor-desc">Skor Tertinggi</option>
+        <option value="skor-asc">Skor Terendah</option>
+        <option value="nama">Nama Subsatker</option>
+        <option value="progress">Progress Terbanyak</option>
+      </select>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper" id="table-container">
+      <div class="loading">
+        <span class="spinner"></span> Memuat data rekap...
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/rekap.js"></script>
+
+</body>
+</html>
